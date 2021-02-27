@@ -9,16 +9,28 @@ export class Register extends Component {
         this.state = {
             email: '',
             password: '',
-            name: ''
+            name: '',
+            age: '',
+            height: '',
+            weight: ''
         }
 
         this.onSignUp=this.onSignUp.bind(this)
     }
 
     onSignUp(){
-        const { email, password, name} = this.state;
+        const { email, password, name, age, height, weight} = this.state;
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((result) => {
+                firebase.firestore().collection("users")
+                .doc(firebase.auth().currentUser.uid)
+                .set({
+                    name,
+                    email,
+                    age,
+                    height,
+                    weight
+                })
                 console.log(result)
             })
             .catch((error) => {
@@ -30,10 +42,6 @@ export class Register extends Component {
         return (
             <View>
                 <TextInput 
-                    placeholder = "Name"
-                    onChangeText={(name) => this.setState({name})}    
-                />
-                <TextInput 
                     placeholder = "Email"
                     onChangeText={(email) => this.setState({email})}    
                 />
@@ -41,6 +49,28 @@ export class Register extends Component {
                     placeholder = "Password"
                     secureTextEntry={true}
                     onChangeText={(password) => this.setState({password})}    
+                />
+                <TextInput 
+                    placeholder = "Name"
+                    onChangeText={(name) => this.setState({name})}    
+                />
+                <TextInput 
+                    placeholder = "Age"
+                    keyboardType = "numeric"
+                    secureTextEntry={true}
+                    onChangeText={(age) => this.setState({age})}    
+                />
+                <TextInput 
+                    placeholder = "Height"
+                    keyboardType = "numeric"
+                    secureTextEntry={true}
+                    onChangeText={(height) => this.setState({height})}    
+                />
+                <TextInput 
+                    placeholder = "Weight"
+                    keyboardType = "numeric"
+                    secureTextEntry={true}
+                    onChangeText={(weight) => this.setState({weight})}    
                 />
 
                 <Button
