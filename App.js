@@ -84,7 +84,7 @@ export class App extends Component {
 
     return(
       <Provider store = {store}>
-        <MainScreen />
+        <MainScreen/>
       </Provider>
       
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {View, Button, TextInput } from 'react-native'
+import {View, Button, TextInput, Text } from 'react-native'
 import firebase from 'firebase'
 
 export class Register extends Component {
@@ -12,7 +12,7 @@ export class Register extends Component {
             name: '',
             age: '',
             height: '',
-            weight: ''
+            weight: '',
         }
 
         this.onSignUp=this.onSignUp.bind(this)
@@ -38,6 +38,8 @@ export class Register extends Component {
             })
     }
 
+    
+
     render() {
         return (
             <View>
@@ -57,19 +59,16 @@ export class Register extends Component {
                 <TextInput 
                     placeholder = "Age"
                     keyboardType = "numeric"
-                    secureTextEntry={true}
                     onChangeText={(age) => this.setState({age})}    
                 />
                 <TextInput 
-                    placeholder = "Height"
+                    placeholder = "Height (in inches)"
                     keyboardType = "numeric"
-                    secureTextEntry={true}
                     onChangeText={(height) => this.setState({height})}    
                 />
                 <TextInput 
-                    placeholder = "Weight"
+                    placeholder = "Weight (in pounds)"
                     keyboardType = "numeric"
-                    secureTextEntry={true}
                     onChangeText={(weight) => this.setState({weight})}    
                 />
 
